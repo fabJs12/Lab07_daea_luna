@@ -1,0 +1,79 @@
+<Window x:Class="Lab07.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="LABORATORIO 07 - PERSONAS" Height="650" Width="1000"
+        MinHeight="600" MinWidth="850" WindowStartupLocation="CenterScreen"
+        Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="16,7" />
+            <Setter Property="Margin" Value="0,0,8,0" />
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Padding" Value="6,5" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Margin="0,0,0,18">
+            <TextBlock Text="LABORATORIO 07 - PERSONAS" FontSize="24" FontWeight="SemiBold" />
+            <TextBlock Text="Sección A · Registro de personas" Foreground="DimGray" Margin="0,5,0,0" />
+        </StackPanel>
+        <GroupBox Grid.Row="1" Header="Datos de la persona" Padding="12" Margin="0,0,0,14">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="24" />
+                    <ColumnDefinition Width="80" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" Content="Id:" Target="{Binding ElementName=txtId}" />
+                <TextBox Grid.Row="0" Grid.Column="1" x:Name="txtId" IsReadOnly="True" Background="#F1F1F1" Margin="0,0,0,10" />
+                <Label Grid.Row="0" Grid.Column="3" Content="Nombres:" Target="{Binding ElementName=txtNombres}" />
+                <TextBox Grid.Row="0" Grid.Column="4" x:Name="txtNombres" MaxLength="80" Margin="0,0,0,10" />
+                <Label Grid.Row="1" Grid.Column="0" Content="Apellidos:" Target="{Binding ElementName=txtApellidos}" />
+                <TextBox Grid.Row="1" Grid.Column="1" x:Name="txtApellidos" MaxLength="80" />
+                <Label Grid.Row="1" Grid.Column="3" Content="DNI:" Target="{Binding ElementName=txtDni}" />
+                <TextBox Grid.Row="1" Grid.Column="4" x:Name="txtDni" MaxLength="8" />
+            </Grid>
+        </GroupBox>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,18">
+            <Button Content="Nuevo" Click="Nuevo_Click" />
+            <Button x:Name="btnGuardar" Content="Guardar" Click="Guardar_Click" />
+            <Button x:Name="btnActualizar" Content="Actualizar" Click="Actualizar_Click" IsEnabled="False" />
+            <Button x:Name="btnEliminar" Content="Eliminar" Click="Eliminar_Click" IsEnabled="False" />
+        </StackPanel>
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,12">
+            <Label Content="Buscar:" Target="{Binding ElementName=txtBuscar}" VerticalAlignment="Center" />
+            <TextBox x:Name="txtBuscar" Width="280" Margin="0,0,10,0" ToolTip="Buscar por nombres, apellidos o DNI" />
+            <Button Content="Buscar" Click="Buscar_Click" />
+        </StackPanel>
+        <StackPanel Grid.Row="4" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="Listar" Click="Listar_Click" />
+                <Button Content="Ordenar A-Z" Click="Ordenar_Click" />
+                <Button Content="Ver estados" Click="VerEstados_Click" />
+                <Button Content="Agrupar" Click="Agrupar_Click" />
+            </StackPanel>
+            <TextBlock x:Name="txtVista" Text="Personas activas" Foreground="DimGray" Margin="0,10,0,0" />
+        </StackPanel>
+        <DataGrid Grid.Row="5" x:Name="dgPersonas" AutoGenerateColumns="True"
+                  IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                  CanUserSortColumns="False" SelectionMode="Single" SelectionUnit="FullRow"
+                  SelectionChanged="Personas_SelectionChanged" HeadersVisibility="Column"
+                  GridLinesVisibility="Horizontal" ColumnWidth="*" MinColumnWidth="120" />
+    </Grid>
+</Window>
